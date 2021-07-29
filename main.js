@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const client = new Discord.Client();
 const fs = require('fs');
 const { prefix, token, mongoURI } = require('./config.json')
-require("dotenv").config();
 
 client.commands = new Discord.Collection();
 

@@ -7,7 +7,9 @@ module.exports = {
         if (!message.member.roles.cache.some(role => role.name === 'pilgrim master' || role.name === 'mod')) return;
 
         var timer = 0;
-        if (args.length === 1 && args[0].matches("\d\d\D")) {
+        console.log(args);
+        console.log(args[0].)
+        if (args.length === 1 && args[0].match("\d\d\D")) {
             if (args[0].endsWith('s')) {
                 timer = parseInt(args[0].substring(0, args[0].length - 1));
             } else if (args[0].endsWith('m')) {
@@ -23,7 +25,11 @@ module.exports = {
             const channels = message.guild.channels.cache.filter(c => c.id === '474091215768387617');
             for (const [channelID, channel] of channels) {
                 for (const [memberID, member] of channel.members) {
-                    Increment.increment(memberID);
+                    opts = {
+                        userId: memberID,
+                        username: member.user.username,
+                    }
+                    Increment.increment(opts);
                 }
             }
         }, timer * 1000);
