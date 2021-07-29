@@ -1,8 +1,8 @@
 const Pilgrim = require('../models/Pilgrim.js');
 
-module.exports.getCount = async (req, callback) => {
+module.exports.getCount = (req, callback) => {
     const filter = { userId: req.userId };
-    await Pilgrim.findOne(filter)
+    Pilgrim.findOne(filter)
     .exec((err, obj) => {
         if (err) {
             console.log(err);

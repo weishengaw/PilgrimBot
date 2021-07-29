@@ -1,4 +1,5 @@
 const Increment = require('../mongoFunctions/Increment.js');
+const { pilgrimRoleId, weisCornerId } = require('../config.json');
 
 module.exports = {
     name: 'start',
@@ -22,8 +23,9 @@ module.exports = {
             message.channel.send('invalid usage, type \'-usage\' for more info');
             return;
         }
+        message.channel.send('<@&' + pilgrimRoleId + '>');
         setTimeout(() => {
-            const channels = message.guild.channels.cache.filter(c => c.id === '474091215768387617');
+            const channels = message.guild.channels.cache.filter(c => c.id === weisCornerId);
             for (const [channelID, channel] of channels) {
                 for (const [memberID, member] of channel.members) {
                     opts = {
