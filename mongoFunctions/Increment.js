@@ -1,10 +1,10 @@
 const Pilgrim = require('../models/Pilgrim.js');
 const GetCount = require('./GetCount.js');
 
-module.exports.increment = async (req, callback) => {
+module.exports.increment = (req, callback) => {
     const filter = { userId: req.userId };
     var count = 0;
-    await Pilgrim.findOne(filter)
+    Pilgrim.findOne(filter)
     .exec((err, obj) => {
         if (err) {
             console.log(err);
