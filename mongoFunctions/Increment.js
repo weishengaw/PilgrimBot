@@ -31,8 +31,6 @@ module.exports.increment = (req, res) => {
             if (err) {
                 console.log(err);
                 res.status(500).send({ message: "could not update" });
-            } else {
-                console.log(doc);
             }
         })
     });
