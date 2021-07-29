@@ -12,6 +12,10 @@ const PilgrimSchema = new mongoose.Schema({
     username: {
         type: String,
         default: ""
+    },
+    nickname: {
+        type: String,
+        default: ""
     }
 });
 

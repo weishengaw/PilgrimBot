@@ -4,6 +4,7 @@ const { pilgrimRoleId, weisCornerId } = require('../config.json');
 module.exports = {
     name: 'start',
     description: 'Start the pilgrimmage!',
+    guildOnly: true,
     execute(message, args) {
         if (!message.member.roles.cache.some(role => role.name === 'pilgrim master' || role.name === 'mod')) return;
 
@@ -20,7 +21,7 @@ module.exports = {
                 return;
             }
         } else if (args.length === 1) {
-            message.channel.send('invalid usage, type \'-usage\' for more info');
+            message.channel.send('invalid usage, use a number followed by s, m, or h');
             return;
         }
         message.channel.send('<@&' + pilgrimRoleId + '>');
@@ -30,7 +31,8 @@ module.exports = {
                 for (const [memberID, member] of channel.members) {
                     opts = {
                         userId: memberID,
-                        username: member.user.username,
+                        username: member.user.tag,
+                        nickname: member.displayName
                     }
                     Increment.increment(opts, (res) => {
                         if (res && res.error) {

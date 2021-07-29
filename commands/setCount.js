@@ -1,10 +1,9 @@
-const GetCount = require('../mongoFunctions/GetCount.js');
+const SetCount = require('../mongoFunctions/SetCount.js');
 
 module.exports = {
-    name: 'get',
+    name: 'set',
     description: 'Get a pilgrim\'s join count!',
     execute(message, args) {
-        var filter = message.member.id;
 
         GetCount.getCount({ userId: filter }, (res) => {
             if (res.error) {
