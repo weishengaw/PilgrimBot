@@ -7,8 +7,6 @@ module.exports = {
         if (!message.member.roles.cache.some(role => role.name === 'pilgrim master' || role.name === 'mod')) return;
 
         var timer = 0;
-        console.log(args);
-        console.log((/^\d+\D$/i).test(args[0]));
         if (args.length === 1 && (/^\d+\D$/i).test(args[0])) {
             if (args[0].endsWith('s')) {
                 timer = parseInt(args[0].substring(0, args[0].length - 1));
@@ -32,7 +30,11 @@ module.exports = {
                         userId: memberID,
                         username: member.user.username,
                     }
-                    Increment.increment(opts);
+                    Increment.increment(opts, (res) => {
+                        if (res && res.error) {
+                            message.channel.send('Error, not recorded for ' + member.user.username);
+                        }
+                    })
                 }
             }
             message.channel.send('Pilgrimmage recorded');
