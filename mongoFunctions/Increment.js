@@ -11,13 +11,16 @@ module.exports.increment = (req, callback) => {
             callback({ error: err });
         }
 
-        var update = {};
-
         if (obj) {
             count = obj.pilgrim_join_count;
-            update = { pilgrim_join_count: count + 1};
         } else {
-            update = { pilgrim_join_count: 1, username: req.username }
+            count = 0
+        }
+
+        const update = {
+            pilgrim_join_count: count + 1,
+            username: req.username,
+            nickname: req.nickname
         }
 
         const opts = {
