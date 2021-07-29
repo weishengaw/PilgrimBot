@@ -1,14 +1,17 @@
 const Pilgrim = require('../models/Pilgrim.js');
 
-module.exports.getCount = (req, res) => {
-    const filter = { userId: req };
-    Pilgrim.findOne(filter, (err, obj) => {
+module.exports.getCount = async (req, callback) => {
+    const filter = { userId: req.userId };
+    await Pilgrim.findOne(filter)
+    .exec((err, obj) => {
         if (err) {
             console.log(err);
-        } else if (!(typeof(obj.pilgrim_join_count) === 'undefined')) {
-            res.send({ count: parseInt(obj.pilgrim_joint_count)});
-        } else {
-            res.send({ count: 0 });
+            callback({ error: err });
         }
-    });
+        if (obj) {
+            callback({ pilgrim_join_count: obj.pilgrim_join_count });
+        } else {
+            callback({ pilgrim_join_count: 0 });
+        }
+    })
 }
