@@ -2,15 +2,40 @@ const SetCount = require('../mongoFunctions/SetCount.js');
 
 module.exports = {
     name: 'set',
-    description: 'Get a pilgrim\'s join count!',
+    description: 'Set a pilgrim\'s join count!',
+    aliases: [],
+    args: 2,
+    usage: '<user> <new amount>',
+    cooldown: 0,
     execute(message, args) {
+        if (!message.member.roles.cache.some(role => role.name === 'pilgrim master' || role.name === 'mod')) return;
 
-        GetCount.getCount({ userId: filter }, (res) => {
+        if (args.length < 2) {
+			return message.channel.send(`You didn't provide enough arguments, ${message.author}!`);
+		} else if (!(/^<@!\d+>$/).test(args[0]) || !(/^\d+$/).test(args[1])) {
+			return message.channel.send('Invalid command');
+		}
+
+        var filter = args[0];
+        filter = filter.substring(3, filter.length - 1);
+
+        var updatee = message.guild.members.cache.find(member => member.id === filter);
+
+        var update = args[1];
+
+        opts = {
+            userId: filter,
+            username: updatee.user.tag,
+            nickname: updatee.displayName,
+            newCount: update
+        }
+
+        SetCount.setCount(opts, (res) => {
             if (res.error) {
-                message.channel.send('Error: could not get pilgrim join count');
+                message.channel.send('Error: could not set pilgrim join count');
                 return;
             }
-            message.channel.send(message.member.displayName + ' has joined the pilgrims ' + res.pilgrim_join_count + ' times!');
-        })
+            message.channel.send(opts.nickname + ' has joined the pilgrims ' + res.pilgrim_join_count + ' times!');
+        });
     },
 }

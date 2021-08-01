@@ -1,6 +1,10 @@
 module.exports = {
     name: 'unsubscribe',
     description: 'Unsubscribe to the pilgrims!',
+    aliases: ['quit'],
+    args: 0,
+    usage: '',
+    cooldown: 5,
     execute(message, args) {
         var role = message.member.guild.roles.cache.find(role => role.name === "pilgrims");
         if (!message.member.roles.cache.find(role => role.name === "pilgrims")) {

@@ -3,6 +3,10 @@ const GetCount = require('../mongoFunctions/GetCount.js');
 module.exports = {
     name: 'subscribe',
     description: 'Subscribe to the pilgrims!',
+    aliases: ['join'],
+    args: 0,
+    usage: '',
+    cooldown: 5,
     execute(message, args) {
         var filter = message.member.id;
 

@@ -4,6 +4,10 @@ const { pilgrimRoleId, weisCornerId } = require('../config.json');
 module.exports = {
     name: 'start',
     description: 'Start the pilgrimmage!',
+    aliases: [],
+    args: 0,
+    usage: "<number><unit (s,m,h)>",
+    cooldown: 5,
     guildOnly: true,
     execute(message, args) {
         if (!message.member.roles.cache.some(role => role.name === 'pilgrim master' || role.name === 'mod')) return;
