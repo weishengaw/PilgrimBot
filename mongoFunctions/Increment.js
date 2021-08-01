@@ -1,38 +1,30 @@
 const Pilgrim = require('../models/Pilgrim.js');
 const GetCount = require('./GetCount.js');
+const SetCount = require('./SetCount.js');
 
 module.exports.increment = (req, callback) => {
+    var opts = {
+        userId: req.userId
+    }
+
     const filter = { userId: req.userId };
-    var count = 0;
-    Pilgrim.findOne(filter)
-    .exec((err, obj) => {
-        if (err) {
-            console.log(err);
-            callback({ error: err });
+
+    GetCount.getCount(filter, (res) => {
+        if (res.error) {
+            callback({ error: res.error });
         }
 
-        if (obj) {
-            count = obj.pilgrim_join_count;
-        } else {
-            count = 0
-        }
-
-        const update = {
-            pilgrim_join_count: count + 1,
+        opts = {
+            userId: req.userId,
             username: req.username,
-            nickname: req.nickname
+            nickname: req.nickname,
+            newCount: res.pilgrim_join_count + 1
         }
 
-        const opts = {
-            upsert: true,
-        };
-
-        Pilgrim.findOneAndUpdate(filter, update, opts, (err, doc) => {
-            if (err) {
-                console.log(err);
-                callback({ err: err });
+        SetCount.setCount(opts, (res2) => {
+            if (res2.error) {
+                callback({ error: res.error });
             }
-            callback(doc);
-        })
-    });
+        });
+    });   
 }
