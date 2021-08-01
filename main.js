@@ -2,6 +2,20 @@ const Discord = require('discord.js');
 const mongoose = require('mongoose');
 const client = new Discord.Client();
 const fs = require('fs');
+require('dotenv').config();
+
+const data = {
+	"prefix": process.env.PREFIX,
+	"token": process.env.TOKEN,
+	"mongoURI": process.env.MONGOURI,
+	"pilgrimRoleId": process.env.PILGRIMROLEID,
+	"weisCornerId": process.env.WEISCORNERID
+};
+
+fs.writeFile('./config.json', data, (err) => {
+	if (err) console.log(err);
+});
+
 const { prefix, token, mongoURI } = require('./config.json')
 
 client.commands = new Discord.Collection();
