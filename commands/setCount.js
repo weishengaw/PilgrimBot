@@ -25,10 +25,6 @@ module.exports = {
         }
         
         var updatee = message.guild.members.cache.find(member => member.id === filter);
-        
-        if (!updatee) {
-            return message.channel.send('Invalid command');
-        }
 
         var update = args[1];
 
