@@ -4,17 +4,15 @@ const client = new Discord.Client();
 const fs = require('fs');
 require('dotenv').config();
 
-const data = {
-	"prefix": process.env.PREFIX,
-	"token": process.env.TOKEN,
-	"mongoURI": process.env.MONGOURI,
-	"pilgrimRoleId": process.env.PILGRIMROLEID,
-	"weisCornerId": process.env.WEISCORNERID
-};
-
-fs.writeFile('./config.json', data, (err) => {
-	if (err) console.log(err);
+const data = JSON.stringify({
+	prefix: process.env.PREFIX,
+	token: process.env.TOKEN,
+	mongoURI: process.env.MONGOURI,
+	pilgrimRoleId: process.env.PILGRIMROLEID,
+	weisCornerId: process.env.WEISCORNERID
 });
+
+fs.writeFileSync('./config.json', data);
 
 const { prefix, token, mongoURI } = require('./config.json')
 
