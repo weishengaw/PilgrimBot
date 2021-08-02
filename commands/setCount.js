@@ -26,6 +26,10 @@ module.exports = {
         
         var updatee = message.guild.members.cache.find(member => member.id === filter);
 
+        if (!updatee) {
+            return message.channel.send('That is not a valid id');
+        }
+
         var update = args[1];
 
         opts = {
