@@ -3,7 +3,7 @@ const GetTop = require('../mongoFunctions/GetTop.js');
 module.exports = {
     name: 'leaderboard',
     description: 'Get the pilgrims leaderboard!',
-    aliases: ['scoreboard', 'top'],
+    aliases: ['scoreboard', 'top', 'lb'],
     args: 0,
     usage: '',
     cooldown: 5,

@@ -24,6 +24,8 @@ module.exports.increment = (req, callback) => {
         SetCount.setCount(opts, (res2) => {
             if (res2.error) {
                 callback({ error: res2.error });
+            } else {
+                callback(res2);
             }
         });
     });   

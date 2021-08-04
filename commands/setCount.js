@@ -3,7 +3,7 @@ const SetCount = require('../mongoFunctions/SetCount.js');
 module.exports = {
     name: 'set',
     description: 'Set a pilgrim\'s join count!',
-    aliases: [],
+    aliases: ['s'],
     args: 2,
     usage: '<user> <new amount>',
     cooldown: 0,
