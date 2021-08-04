@@ -5,7 +5,7 @@ const events = require('events');
 module.exports = {
     name: 'start',
     description: 'Start the pilgrimmage!',
-    aliases: [],
+    aliases: ['st'],
     args: 0,
     usage: "<number><unit (s,m,h)>",
     cooldown: 5,

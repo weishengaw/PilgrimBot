@@ -3,7 +3,7 @@ const GetCount = require('../mongoFunctions/GetCount.js');
 module.exports = {
     name: 'get',
     description: 'Get a pilgrim\'s join count!',
-    aliases: ['count'],
+    aliases: ['count', 'g'],
     args: 0,
     usage: '',
     cooldown: 5,

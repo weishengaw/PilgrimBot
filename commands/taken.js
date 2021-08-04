@@ -12,31 +12,38 @@ module.exports = {
     guildOnly: true,
     execute(message, args) {
         if (!message.member.roles.cache.some(role => role.name === 'pilgrim master' || role.name === 'mod')) return;
-        const pilgrims = [];
+        var pilgrims = [];
         const channels = message.guild.channels.cache.filter(c => c.id === weisCornerId);
-        for (const [channelID, channel] of channels) {
-            for (const [memberID, member] of channel.members) {
-                opts = {
-                    userId: memberID,
-                    username: member.user.tag,
-                    nickname: member.displayName
-                }
-                Increment.increment(opts, (res) => {
-                    if (res && res.error) {
-                        message.channel.send('Error, not recorded for ' + member.user.username);
-                    } else {
-                        pilgrims.push(member.displayName);
+        const update = async (channels) => {
+            for (const [channelID, channel] of channels) {
+                for (const [memberID, member] of channel.members) {
+                    opts = {
+                        userId: memberID,
+                        username: member.user.tag,
+                        nickname: member.displayName
                     }
-                })
+                    await new Promise((resolve, reject) => {
+                        Increment.increment(opts, (res) => {
+                            if (res && res.error) {
+                                message.channel.send('Error, not recorded for ' + member.user.username);
+                                resolve();
+                            } else {
+                                pilgrims.push(member.displayName);
+                                resolve();
+                            }
+                        })
+                    });
+                }
             }
-        }
-        var data = '';
-        for (const pilgrim of pilgrims) {
-            data = data + pilgrim + ', ';
-        }
-        if (data === '') {
-            data = 'no one ';
-        }
-        message.channel.send('Pilgrimmage recorded, ' + data + 'has been recorded in this pilgrimmage');
+            var data = '';
+            for (const pilgrim of pilgrims) {
+                data = data + pilgrim + ', ';
+            }
+            if (data === '') {
+                data = 'no one ';
+            }
+            message.channel.send('Pilgrimmage recorded, ' + data + 'has been recorded in this pilgrimmage');
+        };
+        update(channels);
     },
 }
