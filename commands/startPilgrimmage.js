@@ -34,7 +34,6 @@ module.exports = {
         var startTime = new Date().getTime();
         var fiveminflag = true;
         var oneminflag = true;
-        const event = new events.EventEmitter();
         var interval = setInterval(function(){
             if(new Date().getTime() - startTime > timer) {
                 clearInterval(interval);
@@ -42,11 +41,11 @@ module.exports = {
             }
             if(timer - (new Date().getTime() - startTime) < 300000 && timer > 300000 && fiveminflag) {
                 fiveminflag = false;
-                message.channel.send('<@&' + pilgrimRoleId + '>' + ' approx 5m');
+                message.channel.send('approx 5m');
             }
             if(timer - (new Date().getTime() - startTime) < 60000 && timer > 60000 && oneminflag) {
                 oneminflag = false;
-                message.channel.send('<@&' + pilgrimRoleId + '>' + ' approx 1m');
+                message.channel.send('approx 1m');
             }
         }, 3000)
     },
