@@ -1,6 +1,7 @@
 ## Table of Contents
 - [PilgrimBot Overview](#pilgrimbot-overview)
   - [Setup](#setup)
+    - [Create a local dev mongoDB cluster](#create-a-local-dev-mongodb-cluster)
   - [Running the Bot](#running-the-bot)
 
 # PilgrimBot Overview
@@ -27,24 +28,32 @@ Note: Pilgrim Bot currently does not support users crossing multiple servers wit
       | --------------- | -------------------------------------------------------------------------- |
       | `token`         | The bot's token, comes from step where you created bot                     |
       | `prefix`        | The prefix for bot commands. If empty bot will not respond to any messages |
-      | `mongoURI`      | Your own local development mongoURI                            |
+      | `mongoURI`      | Your own local development mongoURI                                        |
       | `pilgrimRoleId` | Discord ID of the role to be pinged for pilgrimages\*                      |
       | `weisCornerId`  | Discord ID of the channel for that pilgrimages occur in \*                 |
       
       \* These IDs can be obtained by setting Discord to developer mode (User Settings > 
       Advanced > Developer Mode)
 
-Optional: Create a local dev mongoDB cluster
+### Create a local dev mongoDB cluster
+
+Some commands update a mongoDB database. For development you should setup your own database
+to access and manipulate. Thankfully mongoDB provides free clusters that are more than
+sufficient for the small databasing done here.
+
 1. Go to [mongoDB](https://www.mongodb.com/cloud/atlas)
 2. Create an account and sign in
 3. Click 'Create new project' and then 'Build cluster'
 4. Select a provider/region with a free tier
 5. Create the cluster (it takes a short while to build)
 6. Click 'Connect' under the cluster
-7. Set up IP address and user
-8. Select 'Connect Your Application' on the next page
-9. Copy the connection string on the next page, this is your **mongoURI**
-10. Replace the items in the mongoURI with your access username and password, set it up in the .env file, and you have connected to mongo!
+7. Set up IP address and user and confirm.
+8. On the next page ("Connection Method"), Select 'Connect Your Application' and continue
+9. The default settings for driver and version should be latest Node.js. This is what we want
+   for PilgrimBot. Copy the connection string, this is your **mongoURI**
+10. Replace the items in the mongoURI with your access username and password as instructed by
+    the page, assign the URI to the `mongoURI` key in your `.env`. Your bot should now be able to
+    access Mongo.
 
 After this you should be good to run the bot!
 
