@@ -27,12 +27,24 @@ Note: Pilgrim Bot currently does not support users crossing multiple servers wit
       | --------------- | -------------------------------------------------------------------------- |
       | `token`         | The bot's token, comes from step where you created bot                     |
       | `prefix`        | The prefix for bot commands. If empty bot will not respond to any messages |
-      | `mongoURI`      | \< To be filled in by the Almighty Wei Sheng \>                            |
+      | `mongoURI`      | Your own local development mongoURI                            |
       | `pilgrimRoleId` | Discord ID of the role to be pinged for pilgrimages\*                      |
       | `weisCornerId`  | Discord ID of the channel for that pilgrimages occur in \*                 |
       
       \* These IDs can be obtained by setting Discord to developer mode (User Settings > 
       Advanced > Developer Mode)
+
+Optional: Create a local dev mongoDB cluster
+1. Go to [mongoDB](https://www.mongodb.com/cloud/atlas)
+2. Create an account and sign in
+3. Click 'Create new project' and then 'Build cluster'
+4. Select a provider/region with a free tier
+5. Create the cluster (it takes a short while to build)
+6. Click 'Connect' under the cluster
+7. Set up IP address and user
+8. Select 'Connect Your Application' on the next page
+9. Copy the connection string on the next page, this is your **mongoURI**
+10. Replace the items in the mongoURI with your access username and password, set it up in the .env file, and you have connected to mongo!
 
 After this you should be good to run the bot!
 
