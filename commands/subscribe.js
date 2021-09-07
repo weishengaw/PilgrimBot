@@ -3,7 +3,7 @@ const GetCount = require('../mongoFunctions/GetCount.js');
 module.exports = {
     name: 'subscribe',
     description: 'Subscribe to the pilgrims!',
-    aliases: ['join'],
+    aliases: ['join', 'su'],
     args: 0,
     usage: '',
     cooldown: 5,
@@ -18,7 +18,7 @@ module.exports = {
             var role = message.member.guild.roles.cache.find(role => role.name === "pilgrims");
             if (message.member.roles.cache.find(role => role.name === "pilgrims")) {
                 message.channel.send('You\'re already in the pilgrimmage!');
-            } else if (res.pilgrim_join_count >= 5) {
+            } else if (res.pilgrim_join_count >= 0) {
                 message.member.roles.add(role);
                 message.channel.send('You\'ve joined the pilgrimmage!');
             } else {

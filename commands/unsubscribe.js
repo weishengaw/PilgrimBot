@@ -1,7 +1,7 @@
 module.exports = {
     name: 'unsubscribe',
     description: 'Unsubscribe to the pilgrims!',
-    aliases: ['quit'],
+    aliases: ['quit','us'],
     args: 0,
     usage: '',
     cooldown: 5,

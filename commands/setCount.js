@@ -3,7 +3,7 @@ const SetCount = require('../mongoFunctions/SetCount.js');
 module.exports = {
     name: 'set',
     description: 'Set a pilgrim\'s join count!',
-    aliases: [],
+    aliases: ['s'],
     args: 2,
     usage: '<user> <new amount>',
     cooldown: 0,
@@ -12,14 +12,23 @@ module.exports = {
 
         if (args.length < 2) {
 			return message.channel.send(`You didn't provide enough arguments, ${message.author}!`);
-		} else if (!(/^<@!\d+>$/).test(args[0]) || !(/^\d+$/).test(args[1])) {
-			return message.channel.send('Invalid command');
 		}
 
         var filter = args[0];
-        filter = filter.substring(3, filter.length - 1);
 
+        if ((!(/^\d+$/).test(args[0]) && !(/^<@!\d+>$/).test(args[0])) || !(/^\d+$/).test(args[1])) {
+            return message.channel.send('Invalid command');
+        }
+
+        if ((/^<@!\d+>$/).test(args[0])) {
+            filter = filter.substring(3, filter.length - 1);
+        }
+        
         var updatee = message.guild.members.cache.find(member => member.id === filter);
+
+        if (!updatee) {
+            return message.channel.send('That is not a valid id');
+        }
 
         var update = args[1];
 

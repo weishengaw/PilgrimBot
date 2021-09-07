@@ -21,6 +21,7 @@ module.exports = {
             } else if (suffix.endsWith('m')) {
                 timer = parseInt(args[0].substring(0, args[0].length - 1)) * 60000;
             } else if (suffix.endsWith('h')) {
+
                 timer = parseInt(args[0].substring(0, args[0].length - 1)) * 3600000;
             } else {
                 message.channel.send('invalid time suffix, use s, m, or h');
