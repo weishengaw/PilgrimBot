@@ -15,11 +15,13 @@ module.exports = {
 
         var timer = 0;
         if (args.length === 1 && (/^\d+\D$/i).test(args[0])) {
-            if (args[0].endsWith('s')) {
+            var suffix = args[0].toLowerCase()
+            if (suffix.endsWith('s')) {
                 timer = parseInt(args[0].substring(0, args[0].length - 1)) * 1000;
-            } else if (args[0].endsWith('m')) {
+            } else if (suffix.endsWith('m')) {
                 timer = parseInt(args[0].substring(0, args[0].length - 1)) * 60000;
-            } else if (args[0].endsWith('h')) {
+            } else if (suffix.endsWith('h')) {
+
                 timer = parseInt(args[0].substring(0, args[0].length - 1)) * 3600000;
             } else {
                 message.channel.send('invalid time suffix, use s, m, or h');
