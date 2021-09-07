@@ -14,8 +14,8 @@ module.exports = {
         if (!message.member.roles.cache.some(role => role.name === 'pilgrim master' || role.name === 'mod')) return;
 
         var timer = 0;
-        var suffix = args[0].toLowerCase()
         if (args.length === 1 && (/^\d+\D$/i).test(args[0])) {
+            var suffix = args[0].toLowerCase()
             if (suffix.endsWith('s')) {
                 timer = parseInt(args[0].substring(0, args[0].length - 1)) * 1000;
             } else if (suffix.endsWith('m')) {
